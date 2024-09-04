@@ -420,8 +420,13 @@ static THD_FUNCTION(adc_thread, arg) {
 			}
 
 			if (!(ms_without_power < MIN_MS_WITHOUT_POWER && config.safe_start)) {
-				mc_interface_set_duty(utils_map(pwr, -1.0, 1.0, -mcconf->l_max_duty, mcconf->l_max_duty));
-				send_duty = true;
+				if (pwr < 0.001) {
+					// Release the motor when the throttle is low, so we can backdrive the pedals
+					mc_interface_release_motor();
+				} else {
+					mc_interface_set_duty(utils_map(pwr, -1.0, 1.0, -mcconf->l_max_duty, mcconf->l_max_duty));
+					send_duty = true;
+				}
 			}
 			break;
 
