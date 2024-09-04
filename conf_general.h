@@ -70,12 +70,14 @@
  */
 //#include			"mcconf_default.h"
 //#include 			"mcconf_china_60kv.h"
+#include 			"mcconf_cubemars.h"
 
 /*
  * Select default user app configuration
  */
 //#include			"appconf_example_ppm.h"
 //#include			"appconf_custom.h"
+#include 			"appconf_trek.h"
 
 /*
  * Set APP_CUSTOM_TO_USE to the name of the main C file of the custom application.
